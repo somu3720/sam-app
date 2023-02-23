@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'sam-app'
+Resources:
+    LambdaFunctionWithAPI:
+      Type: AWS::Serverless::Function
+      Properties:
+        PackageType: Image
+        #Handler: app.lambda_handler
+        #Runtime: python3.9
+        #Policies:
+        Events:
+          HelloWorld:
+            Type: Api
+            Properties:
+              Path: '/'
+              Method: get
+      Metadata:
+        DockerTag: python3.9-v1
+        DockerContext: ./
+        Dockerfile: Dockerfile
