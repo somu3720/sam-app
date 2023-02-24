@@ -1,5 +1,5 @@
 pipeline {
-    agent { any { image 'public.ecr.aws/lambda/python:3.7' } }
+    agent { any { image 'public.ecr.aws/lambda/python:3.9' } }
     stages {
         stage('build') {
             steps {
