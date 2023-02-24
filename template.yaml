@@ -16,6 +16,6 @@ Resources:
               Path: '/'
               Method: get
       Metadata:
-        DockerTag: python3.9-v1
+        DockerTag: python3.7-v1
         DockerContext: ./
         Dockerfile: Dockerfile
