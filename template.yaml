@@ -4,5 +4,10 @@ Resources:
 HelloWorldFunction:
 Type: AWS::Serverless::Function
 Properties:
-Handler: index.handler
-Runtime: nodejs8.10Events:HelloWorldApi:Type: ApiProperties:Path: /Method: GET
+Handler: app.lambda_handler
+Runtime: python3.8
+HelloWorldApi:
+Type: 
+ApiProperties:
+Path: /
+Method: GET
