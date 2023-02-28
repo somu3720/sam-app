@@ -1,5 +1,5 @@
 pipeline {
-    agent VM-Agent
+    agent { label 'sam-app-agent' }
     stages {
         stage('build') {
             steps {
