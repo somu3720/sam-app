@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'sam-app-agent' }
+    agent any
     stages {
         stage('build') {
             steps {
