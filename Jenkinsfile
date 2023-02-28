@@ -1,5 +1,5 @@
 pipeline {
-    agent Built-In Node
+    agent VM-Agent
     stages {
         stage('build') {
             steps {
