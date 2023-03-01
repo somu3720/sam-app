@@ -1,6 +1,6 @@
 pipeline {
   agent {
-          kubernetes { label 'testpod-ubuntu'}
+          kubernetes { label 'testpod'}
  
          }
   stages {
