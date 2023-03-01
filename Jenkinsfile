@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent{ label 'testpod'}
     stages {
         stage('build') {
             steps {
