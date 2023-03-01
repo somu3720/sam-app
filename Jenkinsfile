@@ -1,6 +1,6 @@
 pipeline {
   agent{ label 'testpod'}
-    stages {
+  stages {
         stage('build') {
             steps {
                 sh 'sam build'
