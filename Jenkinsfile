@@ -1,5 +1,8 @@
 pipeline {
-  agent{ label 'testpod'}
+  agent {
+          kubernetes { label 'testpod'}
+ 
+         }
   stages {
         stage('build') {
             steps {
