@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
                 sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
-                #sh 'sudo apt install unzip'
+                sh 'sudo yum install unzip'
                 sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
                 sh 'sudo ./sam-installation/install'
                 sh 'sam --version'
