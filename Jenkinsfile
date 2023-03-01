@@ -4,11 +4,23 @@ pipeline {
  
          }
   stages {
+        stage('sam install') {
+            steps {
+                sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
+                sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
+                sh 'apt install unzip'
+                sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
+                sh 'sudo ./sam-installation/install'
+                sh 'sam --version'
+            }
+        }
+    
         stage('build') {
             steps {
                 sh 'sam build'
             }
         }
+    
         stage('package'){
             steps{
                 sh 'sam package --output-template-file packaged-template.yaml --image-repository 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
