@@ -12,8 +12,8 @@ pipeline {
                 sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
                 sh 'apk add zip'
                 sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
-                sh 'chmod +x sam-installation/install'
-                sh './sam-installation/install'
+                sh 'apk add sudo'
+                sh 'sudo ./sam-installation/install'
                 sh 'sam --version'
             }
         }
