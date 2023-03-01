@@ -1,5 +1,5 @@
 pipeline {
-  #agent{ label 'testpod'}
+  agent{ label 'testpod'}
     stages {
         stage('build') {
             steps {
