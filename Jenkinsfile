@@ -28,7 +28,7 @@ pipeline {
                     sh 'groupadd docker'
                     sh 'usermod -aG docker root'
                     sh 'apt-get install -y docker.io'
-                    sh 'dockerd --debug -H fd://'
+                    sh 'dockerd --debug --host fd://'
                     sh 'service docker status'
                     sh 'pwd'
                     sh 'ps -aux | grep dockerd'
