@@ -31,7 +31,7 @@ pipeline {
                     sh 'service docker start'
                     sh 'service docker status'
                     sh 'pwd'
-                    sh 'ls -la .docker/run/docker.sock'
+                    sh 'ps -aux | grep dockerd'
  
                 }
             }
