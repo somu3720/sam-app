@@ -24,14 +24,18 @@ pipeline {
                     sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
                     sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
                     sh 'apt-cache policy docker-ce'
+                    sh 'groupadd docker'
+                    sh 'usermod -aG docker $USER'
                     sh 'apt-get install -y docker.io'
                     sh 'service docker start'
-                    sh 'service docker status'
+                    sh ' service docker status'
+ 
                 }
             }
     
         stage('build') {
             steps {
+                sh 'sam local start-api --debug'
                 sh 'sam build'
             }
         }
