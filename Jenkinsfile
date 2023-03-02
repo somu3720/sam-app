@@ -29,15 +29,15 @@ pipeline {
                     sh 'usermod -aG docker root'
                     sh 'apt-get install -y docker.io'
                     sh 'service docker start'
-                    sh ' service docker status'
+                    sh 'service docker status'
+                    sh 'docker ps'
  
                 }
             }
     
         stage('build') {
             steps {
-                sh 'sam local start-api --debug'
-                sh 'sam build'
+                sh 'sam build --use-container'
             }
         }
     
