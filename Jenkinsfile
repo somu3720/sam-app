@@ -20,13 +20,13 @@ pipeline {
     
         stage('Docker install') {
                 steps {
-                    sh 'apt-get install -y apt-transport-https ca-certificates curl software-properties-common'
-                    sh ' apt-get install -y curl'
-                    sh 'apt-get install -y gnupg2'
+                    sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2'
                     sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
                     sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
                     sh 'apt-cache policy docker-ce'
                     sh 'apt-get install -y docker.io'
+                    sh 'service docker start'
+                    sh 'service docker status'
                 }
             }
     
