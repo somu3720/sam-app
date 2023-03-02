@@ -30,6 +30,7 @@ pipeline {
                     sh 'apt-get install -y docker.io'
                     sh 'service docker start'
                     sh 'service docker status'
+                    sh 'docker context ls'
                     sh 'docker ps'
  
                 }
