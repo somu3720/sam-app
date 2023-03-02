@@ -26,7 +26,7 @@ pipeline {
                     sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
                     sh 'apt-cache policy docker-ce'
                     sh 'groupadd docker'
-                    sh 'usermod -aG docker $USER'
+                    sh 'usermod -aG docker root'
                     sh 'apt-get install -y docker.io'
                     sh 'service docker start'
                     sh ' service docker status'
