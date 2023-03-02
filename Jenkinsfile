@@ -26,7 +26,7 @@ pipeline {
                     sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
                     sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
                     sh 'apt-cache policy docker-ce'
-                    sh 'apt-get install -y docker-ce'
+                    sh 'apt-get install -y docker.io'
                 }
             }
     
