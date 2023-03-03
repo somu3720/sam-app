@@ -30,10 +30,9 @@ try
 {
    // code block to test
    sh 'mkdir -p /etc/docker'
-   sh 'echo "{ "hosts": ["fd://"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
+   sh 'echo "{ "hosts": ["fd://", "unix:///var/run/docker.sock"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
    sh 'cat /etc/docker/daemon.json'
    sh 'service docker start'
-   sh 'export DOCKER_HOST="fd://"'
 
    
 } 
