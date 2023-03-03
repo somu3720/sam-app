@@ -7,7 +7,7 @@ pipeline {
 	stage('Environment Setup') { 
 steps {
 sh 'apt-get --allow-releaseinfo-change update'
-sh 'apt-get install -y apt-transport-https software-properties-common gnupg2 wget net-tools unzip lsb-release'
+sh 'apt-get install -y apt-transport-https software-properties-common gnupg2 wget net-tools unzip lsb-release iptables'
 sh 'apt-get install -y ca-certificates curl'
 sh 'whoami'
 sh 'groupadd docker'
@@ -18,7 +18,10 @@ sh 'lsb_release -cs'
 }
 stage('Docker install') {
 steps {
+sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/docker-ce-cli_19.03.11~3-0~debian-buster_amd64.deb'
+sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/containerd.io_1.3.7-1_amd64.deb'
 sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/docker-ce_19.03.11~3-0~debian-buster_amd64.deb'
+sh 'dpkg -i containerd.io_1.3.7-1_amd64.deb docker-ce-cli_19.03.11~3-0~debian-buster_amd64.deb'
 sh 'dpkg -i docker-ce_19.03.11~3-0~debian-buster_amd64.deb'
 sh 'apt-get install -f'
 sh 'service start docker'
