@@ -14,7 +14,7 @@ sh 'groupadd docker'
 sh 'usermod -aG docker root'
 sh 'uname -a'
 sh 'lsb_release -cs'
-sh 'apt list | grep docker-ce'
+sh 'apt-get list | grep docker-ce'
 }
 }
 stage('Docker install') {
