@@ -30,7 +30,7 @@ try
 {
    // code block to test
    sh 'service docker start'
-   sh 'systemctl status docker'
+   sh 'service status docker'
    sh 'docker version'
    sh 'docker info'
    
