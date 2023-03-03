@@ -4,8 +4,16 @@ pipeline {
  
          }
   stages { 
-    
-    
+  
+         stage('Environment Setup') {
+                steps {
+                    sh 'apt-get --allow-releaseinfo-change update'
+                    sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2 wget net-tools unzip'
+                    sh 'whoami'
+                    sh 'groupadd docker'
+                    sh 'usermod -aG docker root'                     
+                       }
+          }
           stage('Docker install') {
                 steps {
                     sh 'apt-get --allow-releaseinfo-change update'
@@ -15,6 +23,7 @@ pipeline {
                     sh 'apt-cache policy docker-ce'
                     sh 'groupadd docker'
                     sh 'usermod -aG docker root'
+                    sh 'apt-cache madison docker-ce | awk '{ print $3 }''
                     sh 'apt-get install -y docker.io net-tools'
                     sh 'docker --version'
                     sh 'echo "{ "hosts": ["unix:///var/run/docker.sock"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
