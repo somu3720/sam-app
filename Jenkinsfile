@@ -14,7 +14,7 @@ sh 'groupadd docker'
 sh 'usermod -aG docker root'
 sh 'uname -a'
 sh 'lsb_release -cs'
-sh 'apt-get list | grep docker-ce'
+
 }
 }
 stage('Docker install') {
@@ -26,6 +26,7 @@ sh 'dpkg -i containerd.io_1.3.7-1_amd64.deb docker-ce-cli_19.03.11~3-0~debian-bu
 sh 'dpkg -i docker-ce_19.03.11~3-0~debian-buster_amd64.deb'
 sh 'apt-get install -f'
 sh 'service start docker'
+sh 'journalctl -f -u docker'
 sh 'docker version'
 sh 'docker info'
 }
