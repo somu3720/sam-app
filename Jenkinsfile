@@ -19,7 +19,7 @@ sh 'lsb_release -cs'
 stage('Docker install') {
 steps {
 sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/docker-ce_19.03.11~3-0~debian-buster_amd64.deb'
-sh 'dpkg -i docker-ce_19.03.11~3-0~debian-buster_'
+sh 'dpkg -i docker-ce_19.03.11~3-0~debian-buster_amd64.deb'
 sh 'apt-get install -f'
 sh 'service start docker'
 sh 'docker version'
