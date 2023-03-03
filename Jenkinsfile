@@ -31,6 +31,7 @@ pipeline {
                     sh 'service docker status'
                     sh 'pwd'
                     sh 'ps -aux | grep dockerd'
+                    sh 'docker ps'
                      
                     
  
@@ -39,7 +40,7 @@ pipeline {
     
         stage('build') {
             steps {
-                sh 'sam build --use-container'
+                sh 'sam build'
             }
         }
     
