@@ -34,9 +34,7 @@ try
    sh 'cat /etc/docker/daemon.json'
    sh 'service docker start'
    sh 'export DOCKER_HOST="fd://"'
-   sh 'DOCKER_HOST=fd:// docker version'
-   sh 'DOCKER_HOST=fd:// docker info'
-   sh 'DOCKER_HOST=fd:// docker ps'
+
    
 } 
 catch (Exception e) 
