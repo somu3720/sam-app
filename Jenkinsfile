@@ -18,11 +18,12 @@ sh 'lsb_release -cs'
 }
 stage('Docker install') {
 steps {
-sh 'mkdir -m 0755 -p /etc/apt/keyrings'
-sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg'
-sh 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null'	
-sh 'chmod a+r /etc/apt/keyrings/docker.gpg'
-sh 'apt-cache madison docker-ce'
+sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/docker-ce_19.03.11~3-0~debian-buster_'
+sh 'dpkg -i docker-ce_19.03.11~3-0~debian-buster_'
+sh 'apt-get install -f'
+sh 'service start docker'
+sh 'docker version'
+sh 'docker info'
 }
 }
 stage('sam install') {
