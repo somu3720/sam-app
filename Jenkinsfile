@@ -33,6 +33,7 @@ try
    sh 'echo "{ "hosts": ["fd://"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
    sh 'cat /etc/docker/daemon.json'
    sh 'service docker start'
+   sh 'export DOCKER_HOST="fd://"'
    sh 'docker version'
    sh 'DOCKER_HOST=fd:// docker info'
    sh 'DOCKER_HOST=fd:// docker ps'
