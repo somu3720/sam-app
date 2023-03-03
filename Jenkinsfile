@@ -27,8 +27,6 @@ pipeline {
                     sh 'groupadd docker'
                     sh 'usermod -aG docker root'
                     sh 'apt-get install -y docker.io'
-                    sh 'echo "{    "storage-driver": "aufs" } " >> /etc/docker/daemon.json'
-                    sh 'cat /etc/docker/daemon.json'
                     sh 'service docker start'
                     sh 'sleep 30'
                     sh 'service docker status'
