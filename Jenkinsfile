@@ -28,6 +28,7 @@ pipeline {
                     sh 'usermod -aG docker root'
                     sh 'apt-get install -y docker.io'
                     sh 'service docker start'
+                    sh 'ls /var/lib/docker/aufs/'
                     sh 'sleep 30'
                     sh 'service docker status'
                     sh 'docker info'
