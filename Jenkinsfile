@@ -35,7 +35,7 @@ pipeline {
                     sh 'service docker status'
                     sh 'ps -aux | grep dockerd'
                     sh 'netstat -tunlp  | grep -i docker'
-                    sh ' sh 'docker info''
+                    sh 'docker info'
                     sh 'docker ps'
                      
                     
