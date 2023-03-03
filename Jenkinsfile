@@ -32,7 +32,7 @@ pipeline {
                     sh 'service docker start'
                     sh 'sleep 30'
                     sh 'service docker status'
-                    sh 'journalctl | grep -i docker | grep -i '03/03/2023''
+                    sh 'docker info'
                     sh 'pwd'
                     sh 'ps -aux | grep dockerd'
                     sh 'docker ps'
