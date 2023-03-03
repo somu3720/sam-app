@@ -32,9 +32,9 @@ try {
 } catch (Exception e) {
    // execute if any exception is thrown
    sh 'journalctl -f -u docker'
+   sh 'docker version'
+   sh 'docker info'
 }
-sh 'docker version'
-sh 'docker info'
 }
 }
 stage('sam install') {
