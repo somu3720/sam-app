@@ -30,8 +30,8 @@ try
 {
    // code block to test
 	
-   sh 'sed -i "s/ fd:// / fd:// --storage-driver overlay2 /" /lib/systemd/system/docker.service'
-   sh 'cat /lib/systemd/system/docker.service'
+   sh 'echo "{ "hosts": ["fd://"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
+   sh 'cat /etc/docker/daemon.json'
    sh 'service docker start'
    sh 'docker version'
    sh 'docker info'
