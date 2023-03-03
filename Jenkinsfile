@@ -4,21 +4,9 @@ pipeline {
  
          }
   stages { 
-       stage('sam install') {
-            steps {
-                sh 'whoami'
-                sh 'apt-get --allow-releaseinfo-change update'
-                sh 'apt-get install wget'
-                sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
-                sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
-                sh 'apt-get install unzip'
-                sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
-                sh './sam-installation/install'
-                sh 'sam --version'
-            }
-      }
     
-      stage('Docker install') {
+    
+          stage('Docker install') {
                 steps {
                     sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2'
                     sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
@@ -26,7 +14,8 @@ pipeline {
                     sh 'apt-cache policy docker-ce'
                     sh 'groupadd docker'
                     sh 'usermod -aG docker root'
-                    sh 'apt-get install -y docker.io'
+                    sh 'apt-get install -y docker.io net-tools'
+                    sh 'docker --version'
                     sh 'echo "{ "hosts": ["unix:///var/run/docker.sock"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
                     sh 'cat /etc/docker/daemon.json'
                     sh 'service docker start'
@@ -42,7 +31,19 @@ pipeline {
  
                 }
        }
-    
+       stage('sam install') {
+            steps {
+                sh 'whoami'
+                sh 'apt-get --allow-releaseinfo-change update'
+                sh 'apt-get install wget'
+                sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
+                sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
+                sh 'apt-get install unzip'
+                sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
+                sh './sam-installation/install'
+                sh 'sam --version'
+            }
+      }
         stage('build') {
             steps {
                 sh 'sam build'
