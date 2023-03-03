@@ -34,8 +34,8 @@ pipeline {
                     sh 'sleep 10'
                     sh 'service docker status'
                     sh 'docker info'
-                    sh 'pwd'
                     sh 'ps -aux | grep dockerd'
+                    sh 'netstat -tunlp  | grep -i docker'
                     sh 'docker ps'
                      
                     
