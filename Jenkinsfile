@@ -14,7 +14,6 @@ sh 'groupadd docker'
 sh 'usermod -aG docker root'
 sh 'uname -a'
 sh 'lsb_release -cs'
-sh 'apt-get search docker-ce'
 sh 'apt list | grep docker-ce'
 }
 }
