@@ -30,14 +30,15 @@ try
 {
    // code block to test
    sh 'service docker start'
+   sh 'systemctl status docker'
+   sh 'docker version'
+   sh 'docker info'
    
 } 
 catch (Exception e) 
 {
    // execute if any exception is thrown
    sh 'journalctl -f -u docker'
-   sh 'docker version'
-   sh 'docker info'
 }
 }
 }
