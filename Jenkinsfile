@@ -13,7 +13,7 @@ pipeline {
                     sh 'apt-cache policy docker-ce'
                     sh 'groupadd docker'
                     sh 'usermod -aG docker root'
-                    sh 'apt-get install -y docker.io
+                    sh 'apt-get install -y docker.io'
                     sh 'service docker status'
                     sh 'pwd'
                     sh 'ps -aux | grep dockerd'
