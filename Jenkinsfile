@@ -20,7 +20,7 @@ sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-
 sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
 sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
 sh 'apt-cache policy docker-ce'
-sh 'apt-cache madison docker-ce | awk '{ print $3 }''
+	sh 'apt-cache madison docker-ce | awk "{ print $3 }"'
 sh 'apt-get install -y docker.io net-tools'
 sh 'docker --version'
 sh 'echo "{ "hosts": ["unix:///var/run/docker.sock"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
