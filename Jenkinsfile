@@ -7,7 +7,8 @@ pipeline {
 	stage('Environment Setup') { 
 steps {
 sh 'apt-get --allow-releaseinfo-change update'
-sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2 wget net-tools unzip'
+sh 'apt-get install -y apt-transport-https software-properties-common gnupg2 wget net-tools unzip'
+sh 'apt-get install -y ca-certificates curl'
 sh 'whoami'
 sh 'groupadd docker'
 sh 'usermod -aG docker root'
