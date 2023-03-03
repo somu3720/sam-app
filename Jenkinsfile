@@ -15,13 +15,11 @@ sh 'usermod -aG docker root'
 }
 stage('Docker install') {
 steps {
-sh 'apt-get --allow-releaseinfo-change update'
-sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2'
 sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
 sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
 sh 'apt-cache policy docker-ce'
 sh 'apt-cache madison docker-ce'
-sh 'apt-get install -y docker.io net-tools'
+sh 'apt-get install -y docker.io'
 sh 'docker --version'
 sh 'echo "{ "hosts": ["unix:///var/run/docker.sock"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
 sh 'cat /etc/docker/daemon.json'
@@ -37,11 +35,8 @@ sh 'docker ps'
 }
 stage('sam install') {
 steps {
-sh 'apt-get --allow-releaseinfo-change update'
-sh 'apt-get install wget'
 sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
 sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
-sh 'apt-get install unzip'
 sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
 sh './sam-installation/install'
 sh 'sam --version'
