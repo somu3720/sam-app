@@ -27,6 +27,7 @@ pipeline {
                     sh 'groupadd docker'
                     sh 'usermod -aG docker root'
                     sh 'apt-get install -y docker.io'
+                    sh 'cat /etc/docker/daemon.json'
                     sh 'service docker start'
                     sh 'service docker status'
                     sh 'pwd'
