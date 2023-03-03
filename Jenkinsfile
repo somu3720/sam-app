@@ -30,7 +30,7 @@ try
 {
    // code block to test
 	
-   sh 'sed -i 's/ fd:\/\/ / fd:\/\/ --storage-driver overlay2 /' /lib/systemd/system/docker.service'
+   sh 'sed -i "s/ fd:\/\/ / fd:\/\/ --storage-driver overlay2 /" /lib/systemd/system/docker.service'
    sh 'cat /lib/systemd/system/docker.service'
    sh 'service docker start'
    sh 'docker version'
