@@ -4,7 +4,24 @@ pipeline {
  
          }
   stages {
-        stage('sam install') {
+
+        stage('Docker install') {
+                steps {
+                    sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2'
+                    sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
+                    sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
+                    sh 'apt-cache policy docker-ce'
+                    sh 'groupadd docker'
+                    sh 'usermod -aG docker root'
+                    sh 'apt-get install -y docker.io
+                    sh 'service docker status'
+                    sh 'pwd'
+                    sh 'ps -aux | grep dockerd'
+ 
+                }
+       }
+        
+       stage('sam install') {
             steps {
                 sh 'whoami'
                 sh 'apt-get --allow-releaseinfo-change update'
@@ -17,25 +34,6 @@ pipeline {
                 sh 'sam --version'
             }
         }
-    
-    
-        stage('Docker install') {
-                steps {
-                    sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2'
-                    sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
-                    sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
-                    sh 'apt-cache policy docker-ce'
-                    sh 'groupadd docker'
-                    sh 'usermod -aG docker root'
-                    sh 'apt-get install -y docker.io'
-                    sh 'docker run --privileged'
-                    sh 'dockerd --debug --host fd://'
-                    sh 'service docker status'
-                    sh 'pwd'
-                    sh 'ps -aux | grep dockerd'
- 
-                }
-            }
     
         stage('build') {
             steps {
