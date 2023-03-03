@@ -25,11 +25,15 @@ sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64
 sh 'dpkg -i containerd.io_1.3.7-1_amd64.deb docker-ce-cli_19.03.11~3-0~debian-buster_amd64.deb'
 sh 'dpkg -i docker-ce_19.03.11~3-0~debian-buster_amd64.deb'
 sh 'apt-get install -f'
-try {
+
+try 
+{
    // code block to test
    sh 'service docker start'
    
-} catch (Exception e) {
+} 
+catch (Exception e) 
+{
    // execute if any exception is thrown
    sh 'journalctl -f -u docker'
    sh 'docker version'
