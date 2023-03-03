@@ -20,16 +20,13 @@ pipeline {
     
       stage('Docker install') {
                 steps {
-                    sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2'
-                    sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
-                    sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
-                    sh 'apt-cache policy docker-ce'
-                    sh 'groupadd docker'
-                    sh 'usermod -aG docker root'
+                    sh 'apt-get update'
                     sh 'apt-get install -y docker.io'
+                    sh 'snap install -y docker'
+                    sh 'docker --version'
                     sh 'service docker status'
-                    sh 'pwd'
-                    sh 'ps -aux | grep dockerd'
+                     
+                    
  
                 }
        }
