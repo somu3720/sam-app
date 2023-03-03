@@ -19,6 +19,7 @@ sh 'lsb_release -cs'
 }
 stage('Docker install') {
 steps {
+script{
 sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/docker-ce-cli_19.03.11~3-0~debian-buster_amd64.deb'
 sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/containerd.io_1.3.7-1_amd64.deb'
 sh 'wget https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/docker-ce_19.03.11~3-0~debian-buster_amd64.deb'
@@ -37,6 +38,7 @@ catch (Exception e)
    sh 'journalctl -f -u docker'
    sh 'docker version'
    sh 'docker info'
+}
 }
 }
 }
