@@ -3,9 +3,22 @@ pipeline {
           kubernetes { label 'testpod-ubuntu'}
  
          }
-  stages {
-
-        stage('Docker install') {
+  stages { 
+       stage('sam install') {
+            steps {
+                sh 'whoami'
+                sh 'apt-get --allow-releaseinfo-change update'
+                sh 'apt-get install wget'
+                sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
+                sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
+                sh 'apt-get install unzip'
+                sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
+                sh './sam-installation/install'
+                sh 'sam --version'
+            }
+      }
+    
+      stage('Docker install') {
                 steps {
                     sh 'apt-get install -y apt-transport-https ca-certificates  software-properties-common curl  gnupg2'
                     sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
@@ -20,20 +33,6 @@ pipeline {
  
                 }
        }
-        
-       stage('sam install') {
-            steps {
-                sh 'whoami'
-                sh 'apt-get --allow-releaseinfo-change update'
-                sh 'apt-get install wget'
-                sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
-                sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
-                sh 'apt-get install unzip'
-                sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
-                sh './sam-installation/install'
-                sh 'sam --version'
-            }
-        }
     
         stage('build') {
             steps {
