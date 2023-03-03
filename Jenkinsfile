@@ -29,7 +29,9 @@ sh 'apt-get install -f'
 try 
 {
    // code block to test
+	
    sh 'service docker start'
+   sh 'cat /lib/systemd/system/docker.service'
    sh 'docker version'
    sh 'docker info'
    
