@@ -7,31 +7,23 @@ pipeline {
 	stage('Environment Setup') { 
 steps {
 sh 'apt-get --allow-releaseinfo-change update'
-sh 'apt-get install -y apt-transport-https software-properties-common gnupg2 wget net-tools unzip'
+sh 'apt-get install -y apt-transport-https software-properties-common gnupg2 wget net-tools unzip lsb-release'
 sh 'apt-get install -y ca-certificates curl'
 sh 'whoami'
 sh 'groupadd docker'
 sh 'usermod -aG docker root'
+sh 'uname -r'
 }
 }
 stage('Docker install') {
 steps {
-sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -'  
-sh 'add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"'
-sh 'apt-cache policy docker-ce'
+sh 'mkdir -m 0755 -p /etc/apt/keyrings'
+sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg'
+sh 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null'	
+sh 'apt-get --allow-releaseinfo-change update'
+sh 'chmod a+r /etc/apt/keyrings/docker.gpg'
+sh 'apt-get --allow-releaseinfo-change update'
 sh 'apt-cache madison docker-ce'
-sh 'apt-get install -y docker.io'
-sh 'docker --version'
-sh 'echo "{ "hosts": ["unix:///var/run/docker.sock"], "storage-driver": "overlay2" }" >> /etc/docker/daemon.json'
-sh 'cat /etc/docker/daemon.json'
-sh 'service docker start'
-sh 'ls /var/lib/docker/'
-sh 'sleep 10'
-sh 'service docker status'
-sh 'ps -aux | grep dockerd'
-sh 'netstat -tunlp  | grep -i docker'
-sh 'docker info'
-sh 'docker ps'
 }
 }
 stage('sam install') {
