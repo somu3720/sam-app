@@ -12,7 +12,7 @@ sh 'apt-get install -y ca-certificates curl'
 sh 'whoami'
 sh 'groupadd docker'
 sh 'usermod -aG docker root'
-sh 'uname -r'
+sh 'uname -a'
 }
 }
 stage('Docker install') {
