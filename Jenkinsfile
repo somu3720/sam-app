@@ -3,8 +3,8 @@ pipeline {
   stages { 
 stage('sam install') {
 steps {
-sh 'sudo apt-get update'
-sh 'sudo apt-get install wget curl zip'
+sh 'sudo apt update'
+sh 'sudo apt install wget curl zip'
 sh 'service docker start'
 sh 'sleep 20'
 sh 'service docker status'
