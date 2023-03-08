@@ -30,6 +30,13 @@ stage('build')
             }
 	    }
         }
+stage('authentication'){
+            steps{
+		    container('ubuntu'){
+                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 940810086075.dkr.ecr.us-east-1.amazonaws.com'
+            }
+	   }
+}
     
         stage('package'){
             steps{
