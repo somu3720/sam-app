@@ -20,15 +20,19 @@ sh './sam-installation/install'
 sh 'sam --version'
 }
 }  
-}   
-stage('authentication'){
-            steps{
-		    container('ubuntu'){
-                sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 940810086075.dkr.ecr.us-east-1.amazonaws.com'
-            }
-	   }
+} 
+stage('aws cli install')
+{
+steps{
+container('ubuntu'){
+sh 'curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"'
+sh 'unzip awscliv2.zip'
+sh 'sudo ./aws/install'
+
+
 }
-   
+}	  
+
 stage('build') 
 	  {
             steps {
@@ -40,18 +44,22 @@ stage('build')
         }
  
         stage('package'){
-            steps{
+            steps{ 
+		    withAWS(credentials: 'AWS-SAM-AUTH', region: 'us-east-1'){
 		    container('ubuntu'){    
                 sh 'sam package --output-template-file packaged-template.yaml --region us-east-1 --image-repository 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
             }
-	    }
+	}
+		    }
         }
         stage('deploy'){
             steps {
+		   withAWS(credentials: 'AWS-SAM-AUTH', region: 'us-east-1'){ 
 		    container('ubuntu'){   
 			sh 'sam deploy --template-file /var/lib/jenkins/workspace/Test-SAM/packaged-template.yaml --stack-name sam-app --no-confirm-changeset --no-fail-on-empty-changeset'// -t template.yaml --region us-east-1 --capabilities CAPABILITY_IAM --confirm-changeset true'// --resolve-image-repos' //940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp' --s3-bucket sam-jenkins-demo-us-west-2-subhayandpwc //--no-confirm-changeset --no-fail-on-empty-changeset'
             }
 	    }
         }
+	}
     }
 }
