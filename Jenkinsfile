@@ -3,7 +3,7 @@ pipeline {
   stages { 
 stage('sam install') {
 steps {
-sh 'sudo -u'
+sh 'sudo --u'
 sh 'apt update'
 sh 'apt install wget curl zip'
 sh 'systemctl start docker'
