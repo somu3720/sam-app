@@ -26,6 +26,7 @@ stage('build')
             steps {
 		    container('ubuntu'){ 
                 sh 'sam build'
+		sh 'docker images'
             }
 	    }
         }
