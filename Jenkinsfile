@@ -12,7 +12,7 @@ sh 'sudo systemctl status docker'
 sh 'docker ps'
 sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
 sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
-sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation -y'
+sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
 sh 'sudo ./sam-installation/install --update'
 sh 'sam --version'
 }  
