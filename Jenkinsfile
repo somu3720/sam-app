@@ -38,7 +38,7 @@ stage('build')
                 script { 
     sh "DOCKER_CONFIG=.docker AWS_ACCESS_KEY_ID=AKIA5WDFGU25SPZBHT45 AWS_SECRET_ACCESS_KEY=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"
     sh 'sam package --output-template-file packaged-template.yaml --region us-east-1 --image-repository 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
-}
+
 }
             }
 	}
@@ -56,6 +56,6 @@ stage('build')
              }
 	    }
           }
-	}
+}
 
 
