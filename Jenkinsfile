@@ -3,16 +3,16 @@ pipeline {
   stages { 
 stage('sam install') {
 steps {
-sh 'sudo apt-get update'
-sh 'sudo apt-get install -y wget curl zip'
-sh 'sudo systemctl start docker'
+sh 'sudo -s apt-get update'
+sh 'sudo-s apt-get install -y wget curl zip'
+sh 'sudo -s systemctl start docker'
 sh 'sleep 20'
-sh 'sudo systemctl status docker'
+sh 'sudo -s systemctl status docker'
 sh 'docker ps'
 sh 'wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip'
 sh 'sha256sum aws-sam-cli-linux-x86_64.zip'
 sh 'unzip aws-sam-cli-linux-x86_64.zip -d sam-installation'
-sh 'sudo ./sam-installation/install'
+sh 'sudo -s ./sam-installation/install'
 sh 'sam --version'
 }  
 } 
