@@ -45,7 +45,7 @@ stage('build')
  
         stage('package'){
             steps{ 
-		 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS-Access', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){ 
+		 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS-SAM-AUTH', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){ 
 		    container('ubuntu'){    
                 sh 'sam package --output-template-file packaged-template.yaml --region us-east-1 --image-repository 940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp'
             
@@ -55,7 +55,7 @@ stage('build')
         }
         stage('deploy'){
             steps {
-		   withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS-Access', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
+		   withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS-SAM-AUTH', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]){
 		    container('ubuntu'){   
 			sh 'sam deploy --template-file /var/lib/jenkins/workspace/Test-SAM/packaged-template.yaml --stack-name sam-app --no-confirm-changeset --no-fail-on-empty-changeset'// -t template.yaml --region us-east-1 --capabilities CAPABILITY_IAM --confirm-changeset true'// --resolve-image-repos' //940810086075.dkr.ecr.us-east-1.amazonaws.com/docker-lambda-testapp' --s3-bucket sam-jenkins-demo-us-west-2-subhayandpwc //--no-confirm-changeset --no-fail-on-empty-changeset'
             		}
